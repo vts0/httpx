@@ -8,6 +8,40 @@ To install the package, run:
 go get github.com/vts0/httpx
 ```
 
+## Example Usage
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/yourrepo/httpx"
+)
+
+type User struct {
+	ID   int    `json:"id"`
+	Name string `json:"name"`
+}
+
+func main() {
+	ctx := context.Background()
+	url := "https://jsonplaceholder.typicode.com/users/1"
+	options := &httpx.RequestOptions{}
+
+	// Send GET request
+	user, err := httpx.Get[User](ctx, url, options)
+	if err != nil {
+		log.Fatalf("Error fetching user: %v", err)
+	}
+
+	fmt.Printf("User ID: %d, Name: %s\n", user.ID, user.Name)
+}
+```
+
+This code demonstrates how to use the httpx package to perform a GET request and deserialize the JSON response into a User struct.
+
 ## Types
 
 ### `RequestOptions`
@@ -129,37 +163,3 @@ Serializes the query parameters to a URL-encoded query string.
 - If the HTTP request fails, the error is propagated with a message indicating the issue.
 - If the HTTP status code is not within the 2xx range, an error with the status code is returned.
 - If the response cannot be deserialized into the expected type, an error is returned.
-
-## Example Usage
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"log"
-
-	"github.com/yourrepo/httpx"
-)
-
-type User struct {
-	ID   int    `json:"id"`
-	Name string `json:"name"`
-}
-
-func main() {
-	ctx := context.Background()
-	url := "https://jsonplaceholder.typicode.com/users/1"
-	options := &httpx.RequestOptions{}
-
-	// Send GET request
-	user, err := httpx.Get[User](ctx, url, options)
-	if err != nil {
-		log.Fatalf("Error fetching user: %v", err)
-	}
-
-	fmt.Printf("User ID: %d, Name: %s\n", user.ID, user.Name)
-}
-```
-
-This code demonstrates how to use the httpx package to perform a GET request and deserialize the JSON response into a User struct.
