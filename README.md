@@ -1,4 +1,4 @@
-# HTTPX Package Documentation
+# HTTPX
 
 This package provides utility functions to perform HTTP requests (GET, POST, PUT, DELETE, PATCH) with customizable options and automatic deserialization of JSON responses.
 
