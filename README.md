@@ -17,7 +17,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/yourrepo/httpx"
+	"github.com/vts0/httpx"
 )
 
 type User struct {
